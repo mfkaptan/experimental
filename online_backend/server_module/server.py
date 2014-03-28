@@ -1,7 +1,6 @@
 import json
 import base64
 import cStringIO
-import tornado
 from tornado.websocket import WebSocketHandler
 from tornado.web import Application
 from tornado.httpserver import HTTPServer
@@ -23,7 +22,7 @@ class _WSHandler(WebSocketHandler):
         self.write_message(self.message_sender())
 
     def on_close(self):
-      print "Connection closed"
+        print "Connection closed"
 
 
 class Server(Thread):
@@ -37,7 +36,7 @@ class Server(Thread):
         self.screenshot = []
         # Message sender arg
         arg = {'message_sender': message_sender or self.send_PNG}
-        application = Application([(r'/', _WSHandler, arg),])
+        application = Application([(r'/', _WSHandler, arg), ])
         self.http_server = HTTPServer(application)
 
     def run(self):
@@ -61,4 +60,4 @@ class Server(Thread):
         base64_PNG = buf.getvalue().encode("base64")
         buf.close()
 
-        return json.dumps({"image" : base64_PNG})
+        return json.dumps({"image": base64_PNG})

@@ -15,7 +15,7 @@ import OpenGL.GLUT as glut
 
 from vispy.gloo import Program, VertexBuffer
 from vispy.util.transforms import ortho
-from Server import Server
+from server import Server
 
 
 ### Start Server
@@ -95,6 +95,7 @@ void main()
 
 WIDTH, HEIGHT = 512, 512
 
+
 def screenshot(viewport=None):
     """ Take a screenshot using glReadPixels."""
     # gl.glReadBuffer(gl.GL_BACK) Not avaliable in ES 2.0
@@ -103,7 +104,7 @@ def screenshot(viewport=None):
 
     x, y, w, h = 0, 0, WIDTH, HEIGHT
 
-    gl.glPixelStorei(gl.GL_PACK_ALIGNMENT, 1) # PACK, not UNPACK
+    gl.glPixelStorei(gl.GL_PACK_ALIGNMENT, 1)  # PACK, not UNPACK
     img = gl.glReadPixels(x, y, w, h, gl.GL_RGB, gl.GL_UNSIGNED_BYTE)
     gl.glPixelStorei(gl.GL_PACK_ALIGNMENT, 4)
 
